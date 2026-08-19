@@ -27,4 +27,9 @@ public class TaskRepository {
         }
         throw new TaskNotFoundException(id);
     }
+
+    public void deleteById(Long id) {
+        Task task = findById(id);
+        tasks.remove(task);
+    }
 }
