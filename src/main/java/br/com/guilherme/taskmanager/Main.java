@@ -24,11 +24,15 @@ public class Main {
         repository.save(task1);
         repository.save(task2);
 
-        for (Task task : repository.findAll()) {
-            System.out.println(
-                    task.getId() + " - "
-                            + task.getTitle()
-            );
-        }
+//        for (Task task : repository.findAll()) {
+//            System.out.println(
+//                    task.getId() + " - "
+//                            + task.getTitle()
+//            );
+//        }
+
+        Task foundTask = repository.findById(999L);
+
+        System.out.println("Tarefa encontrada: " + foundTask.getTitle());
     }
 }
