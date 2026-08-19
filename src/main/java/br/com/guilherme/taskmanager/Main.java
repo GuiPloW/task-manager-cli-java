@@ -12,33 +12,21 @@ public class Main {
         TaskRepository repository = new TaskRepository();
         TaskService service = new TaskService(repository);
 
-        Task task1 = new Task(
-                1L,
+        service.createTask(
                 "Estudar Java",
-                "Revisar POO"
+                "Revisar conceitos de POO"
         );
 
-        Task task2 = new Task(
-                2L,
+        service.createTask(
                 "Fazer projeto",
                 "Continuar o gerenciador de tarefas"
         );
 
-        repository.save(task1);
-        repository.save(task2);
-
-        repository.deleteById(1L);
-
-        service.updateTask(
-                2L,
-                "Finalizar projeto Java",
-                "Terminar o gerenciador de tarefas CLI"
-        );
-
-        Task updatedTask = repository.findById(2L);
-
-        System.out.println(updatedTask.getTitle());
-        System.out.println(updatedTask.getDescription());
+        for (Task task : repository.findAll()) {
+            System.out.println(
+                    task.getId() + " - " + task.getTitle()
+            );
+        }
 
 //        for (Task task : repository.findAll()) {
 //            System.out.println(task.getId() + " - " + task.getTitle());
