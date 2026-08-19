@@ -2,6 +2,7 @@ package br.com.guilherme.taskmanager;
 
 import br.com.guilherme.taskmanager.model.Task;
 import br.com.guilherme.taskmanager.repository.TaskRepository;
+import br.com.guilherme.taskmanager.exception.TaskNotFoundException;
 
 public class Main {
 
@@ -24,15 +25,19 @@ public class Main {
         repository.save(task1);
         repository.save(task2);
 
-//        for (Task task : repository.findAll()) {
-//            System.out.println(
-//                    task.getId() + " - "
-//                            + task.getTitle()
-//            );
-//        }
+        repository.deleteById(1L);
 
-        Task foundTask = repository.findById(999L);
+        for (Task task : repository.findAll()) {
+            System.out.println(task.getId() + " - " + task.getTitle());
+        }
 
-        System.out.println("Tarefa encontrada: " + foundTask.getTitle());
+        try {
+            Task foundTask = repository.findById(999L);
+
+            System.out.println("Tarefa encontrada: " + foundTask.getTitle());
+
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
