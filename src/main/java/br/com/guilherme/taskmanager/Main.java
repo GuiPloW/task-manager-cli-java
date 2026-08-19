@@ -1,22 +1,34 @@
 package br.com.guilherme.taskmanager;
 
 import br.com.guilherme.taskmanager.model.Task;
+import br.com.guilherme.taskmanager.repository.TaskRepository;
 
 public class Main {
 
     public static void main(String[] args) {
-        Task task = new Task(
+
+        TaskRepository repository = new TaskRepository();
+
+        Task task1 = new Task(
                 1L,
-                "estudar java",
-                "revisar conceitos de POO"
+                "Estudar Java",
+                "Revisar POO"
         );
 
-        System.out.println("Titulo: " + task.getTitle());
-        System.out.println("Descricao: " + task.getDescription());
-        System.out.println("Concluida: " + task.isCompleted());
+        Task task2 = new Task(
+                2L,
+                "Fazer projeto",
+                "Continuar o gerenciador de tarefas"
+        );
 
-        task.markAsCompleted();
+        repository.save(task1);
+        repository.save(task2);
 
-        System.out.println("Concluida depois da alteracao: " + task.isCompleted());
+        for (Task task : repository.findAll()) {
+            System.out.println(
+                    task.getId() + " - "
+                            + task.getTitle()
+            );
+        }
     }
 }
