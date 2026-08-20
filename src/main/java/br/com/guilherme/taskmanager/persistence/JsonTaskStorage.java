@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonTaskStorage {
+public class JsonTaskStorage implements TaskStorage {
 
     private final ObjectMapper objectMapper;
     private final File file;
@@ -21,6 +21,7 @@ public class JsonTaskStorage {
         this.file = new File("tasks.json");
     }
 
+    @Override
     public void save(List<Task> tasks) {
         try {
             objectMapper
@@ -35,6 +36,7 @@ public class JsonTaskStorage {
         }
     }
 
+    @Override
     public List<Task> load() {
 
         if (!file.exists()) {

@@ -2,17 +2,17 @@ package br.com.guilherme.taskmanager.repository;
 
 import br.com.guilherme.taskmanager.exception.TaskNotFoundException;
 import br.com.guilherme.taskmanager.model.Task;
-import br.com.guilherme.taskmanager.persistence.JsonTaskStorage;
+import br.com.guilherme.taskmanager.persistence.TaskStorage;
 
 import java.util.List;
 
 public class TaskRepository {
 
     private final List<Task> tasks;
-    private final JsonTaskStorage storage;
+    private final TaskStorage storage;
 
-    public TaskRepository() {
-        this.storage = new JsonTaskStorage();
+    public TaskRepository(TaskStorage storage) {
+        this.storage = storage;
         this.tasks = storage.load();
     }
 
