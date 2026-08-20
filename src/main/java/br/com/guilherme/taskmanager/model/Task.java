@@ -7,6 +7,11 @@ public class Task {
     private String description;
     private Boolean completed;
 
+    // Construtor vazio para o Jackson
+    public Task() {
+    }
+
+    // Construtor que já tínhamos
     public Task(Long id, String title, String description) {
         this.id = id;
         this.title = title;
@@ -30,12 +35,22 @@ public class Task {
         return completed;
     }
 
+    // NOVO
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    // NOVO
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 
     public void markAsCompleted() {
