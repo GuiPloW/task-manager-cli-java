@@ -2,6 +2,7 @@ package br.com.guilherme.taskmanager.service;
 
 import br.com.guilherme.taskmanager.model.Task;
 import br.com.guilherme.taskmanager.repository.TaskRepository;
+import br.com.guilherme.taskmanager.exception.ValidationException;
 
 import java.util.List;
 
@@ -17,10 +18,12 @@ public class TaskService {
 
     public Task createTask(String title, String description) {
 
+        validateTitle(title);
+
         Task task = new Task(
                 nextId,
-                title,
-                description
+                title.trim(),
+                description.trim()
         );
 
         repository.save(task);
@@ -40,10 +43,12 @@ public class TaskService {
             String newDescription
     ) {
 
+        validateTitle(newTitle);
+
         Task task = repository.findById(id);
 
-        task.setTitle(newTitle);
-        task.setDescription(newDescription);
+        task.setTitle(newTitle.trim());
+        task.setDescription(newDescription.trim());
 
         repository.update();
     }
@@ -59,6 +64,14 @@ public class TaskService {
 
     public void deleteTask(Long id) {
         repository.deleteById(id);
+    }
+
+    private void validateTitle(String title) {
+        if (title == null || title.isBlank()) {
+            throw new ValidationException(
+                    "O título da tarefa não pode estar vazio."
+            );
+        }
     }
 
     private Long calculateNextId() {

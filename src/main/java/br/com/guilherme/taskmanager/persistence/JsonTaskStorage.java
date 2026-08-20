@@ -4,6 +4,8 @@ import br.com.guilherme.taskmanager.model.Task;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.guilherme.taskmanager.exception.StorageException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class JsonTaskStorage {
                     .writeValue(file, tasks);
 
         } catch (IOException e) {
-            throw new RuntimeException(
+            throw new StorageException(
                     "Erro ao salvar as tarefas.",
                     e
             );
@@ -46,7 +48,7 @@ public class JsonTaskStorage {
             );
 
         } catch (IOException e) {
-            throw new RuntimeException(
+            throw new StorageException(
                     "Erro ao carregar as tarefas.",
                     e
             );

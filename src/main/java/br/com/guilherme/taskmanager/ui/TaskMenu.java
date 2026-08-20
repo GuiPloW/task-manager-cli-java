@@ -1,6 +1,8 @@
 package br.com.guilherme.taskmanager.ui;
 
+import br.com.guilherme.taskmanager.exception.StorageException;
 import br.com.guilherme.taskmanager.exception.TaskNotFoundException;
+import br.com.guilherme.taskmanager.exception.ValidationException;
 import br.com.guilherme.taskmanager.model.Task;
 import br.com.guilherme.taskmanager.service.TaskService;
 
@@ -30,34 +32,46 @@ public class TaskMenu {
                 continue;
             }
 
-            switch (option) {
+            try {
+                switch (option) {
 
-                case 1:
-                    createTask();
-                    break;
+                    case 1:
+                        createTask();
+                        break;
 
-                case 2:
-                    listTasks();
-                    break;
+                    case 2:
+                        listTasks();
+                        break;
 
-                case 3:
-                    updateTask();
-                    break;
+                    case 3:
+                        updateTask();
+                        break;
 
-                case 4:
-                    completeTask();
-                    break;
+                    case 4:
+                        completeTask();
+                        break;
 
-                case 5:
-                    deleteTask();
-                    break;
+                    case 5:
+                        deleteTask();
+                        break;
 
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
+                    case 0:
+                        System.out.println("Saindo...");
+                        break;
 
-                default:
-                    System.out.println("Opção inválida.");
+                    default:
+                        System.out.println("Opção inválida.");
+                }
+
+            } catch (StorageException e) {
+                System.out.println(
+                        "Erro ao acessar os dados: " + e.getMessage()
+                );
+
+            } catch (ValidationException e) {
+                System.out.println(
+                        "Dados inválidos: " + e.getMessage()
+                );
             }
 
         } while (option != 0);
