@@ -1,254 +1,194 @@
-# Task Manager CLI - Java
+<div align="center">
 
-Gerenciador de tarefas desenvolvido em Java para execução via linha de comando (CLI).
+# ☕ Task Manager CLI
 
-O projeto foi criado com foco na prática de Programação Orientada a Objetos (POO), organização em camadas, persistência de dados em JSON, tratamento de exceções e testes automatizados.
+### Gerenciador de tarefas desenvolvido em Java
 
-## Funcionalidades
+Projeto desenvolvido para aplicar conceitos de **Java, Programação Orientada a Objetos, arquitetura em camadas, persistência de dados e tratamento de exceções** em uma aplicação funcional executada pelo terminal.
 
-O sistema permite:
+</div>
 
-- Criar tarefas
-- Listar tarefas cadastradas
-- Editar título e descrição
-- Marcar tarefas como concluídas
-- Excluir tarefas
-- Manter os dados salvos entre execuções
-- Validar dados informados pelo usuário
-- Tratar tarefas inexistentes e erros de persistência
+---
 
-## Exemplo de uso
+## 📖 Sobre o projeto
 
-Ao iniciar a aplicação, o seguinte menu é exibido:
+O **Task Manager CLI** é uma aplicação de linha de comando para gerenciamento de tarefas.
 
-```text
-===== GERENCIADOR DE TAREFAS =====
-1 - Criar tarefa
-2 - Listar tarefas
-3 - Editar tarefa
-4 - Concluir tarefa
-5 - Excluir tarefa
-0 - Sair
-Escolha uma opção:
-```
+O projeto foi desenvolvido com o objetivo de colocar em prática conceitos importantes do desenvolvimento Java, separando responsabilidades entre as diferentes camadas da aplicação e evitando concentrar toda a lógica em uma única classe.
 
-Exemplo de tarefas cadastradas:
+A aplicação permite gerenciar tarefas através de um menu interativo no terminal e mantém os dados persistidos entre as execuções.
 
-```text
-===== TAREFAS =====
-[ ] #1 - Estudar Java
-    Revisar Programação Orientada a Objetos
+---
 
-[X] #2 - Finalizar projeto
-    Finalizar o gerenciador de tarefas CLI
-```
+## ⚙️ Funcionalidades
 
-`[ ]` representa uma tarefa pendente e `[X]` uma tarefa concluída.
+- ➕ Criar novas tarefas
+- 📋 Listar tarefas cadastradas
+- 🔍 Buscar tarefas
+- ✏️ Atualizar informações de uma tarefa
+- ✅ Alterar o status de uma tarefa
+- 🗑️ Remover tarefas
+- 💾 Persistir os dados entre execuções
+- ⚠️ Validar entradas do usuário
+- 🛡️ Tratar erros através de exceções
 
-## Tecnologias utilizadas
+---
 
-- Java 21
-- Maven
-- Jackson
-- JUnit 5
-- Git e GitHub
-- IntelliJ IDEA
+## 🧱 Arquitetura
 
-## Estrutura do projeto
+O projeto foi organizado em camadas para separar as responsabilidades da aplicação:
 
 ```text
-src/
-├── main/
-│   └── java/
-│       └── br/com/guilherme/taskmanager/
-│           ├── exception/
-│           │   ├── StorageException.java
-│           │   ├── TaskNotFoundException.java
-│           │   └── ValidationException.java
-│           │
-│           ├── model/
-│           │   └── Task.java
-│           │
-│           ├── persistence/
-│           │   ├── JsonTaskStorage.java
-│           │   └── TaskStorage.java
-│           │
-│           ├── repository/
-│           │   └── TaskRepository.java
-│           │
-│           ├── service/
-│           │   └── TaskService.java
-│           │
-│           ├── ui/
-│           │   └── TaskMenu.java
-│           │
-│           └── Main.java
+br.com.guilherme.taskmanager
 │
-└── test/
-    └── java/
-        └── br/com/guilherme/taskmanager/
-            ├── persistence/
-            │   └── MemoryTaskStorage.java
-            ├── repository/
-            │   └── TaskRepositoryTest.java
-            └── service/
-                └── TaskServiceTest.java
+├── model
+│   └── Task
+│
+├── repository
+│   └── ...
+│
+├── service
+│   └── TaskService
+│
+├── ui
+│   └── TaskMenu
+│
+├── exception
+│   ├── TaskNotFoundException
+│   └── StorageException
+│
+└── Main
 ```
 
-## Arquitetura
+### `model`
 
-O projeto foi dividido em responsabilidades para evitar concentração da lógica em uma única classe.
+Representa as entidades e os dados utilizados pela aplicação.
 
-### Model
+### `repository`
 
-`Task` representa uma tarefa e mantém seus dados e comportamentos.
+Responsável pelo acesso e persistência dos dados.
 
-### UI
+### `service`
 
-`TaskMenu` é responsável pela interação com o usuário através do terminal.
+Contém as regras de negócio e faz a comunicação entre a interface e a camada de persistência.
 
-### Service
+### `ui`
 
-`TaskService` concentra as regras de negócio, como criação, edição, conclusão e validação das tarefas.
+Responsável pela interação com o usuário através do terminal.
 
-### Repository
+### `exception`
 
-`TaskRepository` é responsável pelo acesso e gerenciamento das tarefas.
+Contém exceções específicas da aplicação, permitindo um tratamento de erros mais organizado.
 
-### Persistence
+---
 
-A interface `TaskStorage` define o contrato de persistência.
+## 🛠️ Tecnologias utilizadas
 
-A implementação `JsonTaskStorage` utiliza Jackson para salvar e recuperar as tarefas de um arquivo JSON.
+<div align="center">
 
-Essa abstração permite utilizar diferentes formas de armazenamento sem alterar a regra de negócio.
+<img src="https://skillicons.dev/icons?i=java,maven,git,github,idea" />
 
-```text
-TaskService
-     |
-TaskRepository
-     |
-TaskStorage
-     |
-JsonTaskStorage
-     |
- tasks.json
-```
+</div>
 
-Nos testes, a implementação em JSON é substituída por armazenamento em memória:
+- **Java**
+- **Maven**
+- **Git**
+- **GitHub**
+- **IntelliJ IDEA**
 
-```text
-TaskRepository
-     |
-TaskStorage
-     |
-MemoryTaskStorage
-```
+---
 
-Isso mantém os testes isolados dos dados reais da aplicação.
+## 💡 Conceitos aplicados
 
-## Persistência
+Durante o desenvolvimento foram aplicados conceitos como:
 
-As tarefas são armazenadas localmente no arquivo:
+- Programação Orientada a Objetos
+- Encapsulamento
+- Separação de responsabilidades
+- Arquitetura em camadas
+- Repository Pattern
+- Service Layer
+- Persistência de dados
+- Tratamento de exceções
+- Validação de entrada
+- Collections
+- Manipulação de arquivos
+- Git e versionamento de código
 
-```text
-tasks.json
-```
+---
 
-O arquivo é criado automaticamente durante a utilização da aplicação.
-
-O `tasks.json` não é versionado no Git, pois contém dados gerados durante a execução.
-
-Exemplo:
-
-```json
-[
-  {
-    "id": 1,
-    "title": "Estudar Java",
-    "description": "Revisar POO",
-    "completed": false
-  }
-]
-```
-
-## Tratamento de exceções
-
-O projeto possui exceções específicas para diferentes situações:
-
-- `TaskNotFoundException` - tarefa solicitada não existe
-- `ValidationException` - dados informados são inválidos
-- `StorageException` - erro durante leitura ou gravação dos dados
-
-## Testes
-
-Os testes automatizados foram desenvolvidos utilizando JUnit 5.
-
-São testadas operações como:
-
-- Criação de tarefas
-- Listagem
-- Edição
-- Conclusão
-- Exclusão
-- Validação de título
-- Busca por ID
-- Tratamento de tarefas inexistentes
-
-Os testes utilizam `MemoryTaskStorage`, evitando alterações no arquivo `tasks.json` durante sua execução.
-
-## Como executar
+## ▶️ Como executar
 
 ### Pré-requisitos
 
-É necessário ter instalado:
+Para executar o projeto, é necessário possuir:
 
-- JDK 21
-- Maven
+- **Java JDK 21** ou superior
+- **Git**
+- **Maven**
 
-Clone o repositório:
+### 1. Clone o repositório
 
 ```bash
-git clone git@github.com:GuiPlow/task-manager-cli-java.git
+git clone https://github.com/GuiPloW/task-manager-cli-java.git
 ```
 
-Entre na pasta:
+### 2. Entre na pasta do projeto
 
 ```bash
 cd task-manager-cli-java
 ```
 
-Compile o projeto:
+### 3. Compile o projeto
 
 ```bash
-mvn clean compile
+mvn clean package
 ```
 
-Os testes podem ser executados com:
+### 4. Execute a aplicação
 
-```bash
-mvn test
-```
+Execute a classe principal do projeto através da sua IDE.
 
-A aplicação também pode ser executada diretamente pela classe `Main` através de uma IDE como IntelliJ IDEA.
+Após iniciar, o menu interativo será exibido no terminal.
 
-## Conceitos aplicados
+---
 
-Durante o desenvolvimento foram utilizados conceitos como:
+## 🎯 Objetivo do projeto
 
-- Programação Orientada a Objetos
-- Encapsulamento
-- Interfaces
-- Polimorfismo
-- Separação de responsabilidades
-- Injeção de dependência
-- Repository Pattern
-- Persistência em JSON
-- Tratamento de exceções
-- Validação de regras de negócio
-- Testes unitários
-- Git e versionamento de código
+Este projeto faz parte do meu processo de aprendizado em **desenvolvimento Back-end com Java**.
 
-## Autor
+A proposta foi construir uma aplicação simples, mas estruturada de forma próxima a projetos reais, aplicando separação de responsabilidades, persistência e tratamento adequado de erros.
 
-Guilherme Magalhães
+Ele também serve como base para projetos mais avançados envolvendo:
+
+`Spring Boot` • `APIs REST` • `PostgreSQL` • `Docker`
+
+---
+
+## 👨‍💻 Autor
+
+<div align="center">
+
+**Guilherme Magalhães**
+
+Desenvolvedor Java & Back-end em formação
+
+<br>
+
+<a href="https://github.com/GuiPloW">
+  <img src="https://img.shields.io/badge/GitHub-GuiPloW-181717?style=for-the-badge&logo=github">
+</a>
+
+<a href="https://www.linkedin.com/in/guiplow/">
+  <img src="https://img.shields.io/badge/LinkedIn-Guilherme%20Magalhães-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white">
+</a>
+
+</div>
+
+---
+
+<div align="center">
+
+⭐ Se este projeto foi útil ou interessante, considere deixar uma estrela.
+
+</div>
